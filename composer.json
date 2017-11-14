@@ -1,0 +1,22 @@
+{
+    "name": "econtract/steam",
+    "description": "A wrapper lib to use steam",
+    "version": "1.0",
+    "type": "library",
+    "license": "private",
+    "authors": [
+        {
+            "name": "Bilal",
+            "email": "bilal.murtaza@live.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "ixudra/curl": "^6.15"
+    },
+    "autoload": {
+        "psr-0": {
+            "Steam\\": "src/"
+        }
+    }
+}
