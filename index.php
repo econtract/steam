@@ -9,13 +9,28 @@ ini_set('display_errors', 1);
 
 $test = new SteamService(
     'https://io.steam.eu.com/api',
-    'Basic ODM1MDlhZmVhNmYxOjRjZjViYWQ1LTUyODYtNDI3Mi1iYmQ3LTRkNTg3ZThlYmYyMg=='
+    'add auth key here ...'
 );
 
 /**
  * @var \Ixudra\Curl\CurlService
  */
-$service = $test->prepCall('CampaignRecords');
+$resp = $test
+    ->prepCall('CampaignRecords')
+    ->populate('119046', [
+        [
+        'ContextID' => 'ExternalID1',
+        'Data' => [
+            'telefoonnummer' => '',
+            'mobiel' => '',
+            'deeplink' => '',
+            'call_type' => '',
+            'clientid' => ''
+            ]
+        ]
+    ])
+    ->send();
 
-var_dump($service->get());
+echo '<pre>';
+print_r($resp);
 exit;
