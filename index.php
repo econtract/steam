@@ -9,7 +9,7 @@ ini_set('display_errors', 1);
 
 $test = new SteamService(
     'https://io.steam.eu.com/api',
-    'add auth key here ...'
+    'Add auth key here ...'
 );
 
 /**

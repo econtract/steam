@@ -79,16 +79,15 @@ class SteamService
      */
     public function send()
     {
-        $this
-            ->request
-            ->withContentType('application/json')
-            ->withData(json_encode($this->requestData));
-
         $resp = '{}';
         if (array_key_exists('CampaignRecords', $this->requestData)) {
-            $resp = $this->request->post();
+            $resp = $this
+                ->request
+                ->withContentType('application/json')
+                ->withData(json_encode($this->requestData))
+                ->post();
         } else {
-            $resp = $this->request->get();
+            $resp = $this->request->withData($this->requestData)->get();
         }
 
         return json_decode($resp, true);
