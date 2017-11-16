@@ -60,12 +60,7 @@ class SteamService
         );
 
         if (count($campaignRecords) > 0) {
-            $records = [];
-            foreach ($campaignRecords as $crntCampaignRecord) {
-                $records[] = $this->processCampaignRecord($crntCampaignRecord);
-            }
-
-            $requestData['CampaignRecords'] = $records;
+            $requestData['CampaignRecords'] = $campaignRecords;
         }
 
         $this->requestData = $requestData;
@@ -91,34 +86,6 @@ class SteamService
         }
 
         return json_decode($resp, true);
-    }
-
-    /**
-     * helper method to process campaign record input, to be passed to Steam
-     * @param $campaignRecord
-     * @return array
-     */
-    private function processCampaignRecord($campaignRecord)
-    {
-        $data = $campaignRecord['Data'];
-
-        $processed = array(
-            'ContextID' => $campaignRecord['ContextID'],
-            'Data' => array(
-                'telefoonnummer' => $this->trimStr($data, 'telefoonnummer', 15),
-                'mobiel' => $this->trimStr($data, 'mobiel', 15),
-                'deeplink' => $this->trimStr($data, 'deeplink', 100),
-                'call_type' => $this->trimStr($data, 'call_type', 10),
-                'clientid' => $this->trimStr($data, 'clientid', 10)
-            )
-        );
-
-        return $processed;
-    }
-
-    private function trimStr($source, $key, $length)
-    {
-        return (array_key_exists($key, $source) && strlen($source[$key]) > $length) ? substr($source[$key], 0, $length) : $source[$key];
     }
 
 }
