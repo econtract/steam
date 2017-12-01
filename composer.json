@@ -2,6 +2,8 @@
     "name": "econtract/steam",
     "description": "A wrapper lib to use steam",
     "type": "library",
+    "keywords": ["econtract-steam"],
+    "homepage": "https://github.com/econtract/steam",
     "license": "private",
     "authors": [
         {
@@ -9,7 +11,6 @@
             "email": "bilal.murtaza@live.com"
         }
     ],
-    "minimum-stability": "stable",
     "require": {
         "ixudra/curl": "^6.15"
     },
