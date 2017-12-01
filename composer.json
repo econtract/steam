@@ -1,7 +1,7 @@
 {
     "name": "econtract/steam",
     "description": "A wrapper lib to use steam",
-    "version": "2.0",
+    "version": "2.1",
     "type": "library",
     "license": "private",
     "authors": [
