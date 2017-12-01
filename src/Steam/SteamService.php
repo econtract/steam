@@ -88,7 +88,7 @@ class SteamService
         return json_decode($resp, true);
     }
 
-    
+
     /**
      * update a request and return the response
      * @return array
@@ -108,5 +108,4 @@ class SteamService
 
         return json_decode($resp, true);
     }
-
 }
