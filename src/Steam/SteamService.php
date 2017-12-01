@@ -69,10 +69,10 @@ class SteamService
     }
 
     /**
-     * send the request and return the response
+     * create the request and return the response
      * @return array
      */
-    public function send()
+    public function create()
     {
         $resp = '{}';
         if (array_key_exists('CampaignRecords', $this->requestData)) {
@@ -81,6 +81,26 @@ class SteamService
                 ->withContentType('application/json')
                 ->withData(json_encode($this->requestData))
                 ->post();
+        } else {
+            $resp = $this->request->withData($this->requestData)->get();
+        }
+
+        return json_decode($resp, true);
+    }
+
+    /**
+     * update a request and return the response
+     * @return array
+     */
+    public function update()
+    {
+        $resp = '{}';
+        if (array_key_exists('CampaignRecords', $this->requestData)) {
+            $resp = $this
+                ->request
+                ->withContentType('application/json')
+                ->withData(json_encode($this->requestData))
+                ->put();
         } else {
             $resp = $this->request->withData($this->requestData)->get();
         }
