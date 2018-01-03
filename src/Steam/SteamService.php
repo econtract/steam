@@ -68,11 +68,7 @@ class SteamService
         return $this;
     }
 
-    /**
-     * create the request and return the response
-     * @return array
-     */
-    public function create()
+    protected function sendRequest($type = 'post')
     {
         $resp = '{}';
         if (array_key_exists('CampaignRecords', $this->requestData)) {
@@ -80,7 +76,7 @@ class SteamService
                 ->request
                 ->withContentType('application/json')
                 ->withData(json_encode($this->requestData))
-                ->post();
+                ->{$type}();
         } else {
             $resp = $this->request->withData($this->requestData)->get();
         }
@@ -88,6 +84,14 @@ class SteamService
         return json_decode($resp, true);
     }
 
+    /**
+     * create the request and return the response
+     * @return array
+     */
+    public function create()
+    {
+        return $this->sendRequest();
+    }
 
     /**
      * update a request and return the response
@@ -95,17 +99,27 @@ class SteamService
      */
     public function update()
     {
-        $resp = '{}';
-        if (array_key_exists('CampaignRecords', $this->requestData)) {
-            $resp = $this
-                ->request
-                ->withContentType('application/json')
-                ->withData(json_encode($this->requestData))
-                ->put();
-        } else {
-            $resp = $this->request->withData($this->requestData)->get();
-        }
-
-        return json_decode($resp, true);
+        return $this->sendRequest('put');
     }
+
+    /**
+     * method to soft delete a steam record ...
+     * Ref: AB-169 ... status code 113 is used to indicate deleted record.
+     */
+    public function delete($importSetupId, $contextId, $id)
+    {
+        return $this->populate($importSetupId,
+            [
+                [
+                    "ContextID" => $contextId,
+                    "ID"        => $id,
+                    "Status"    => 113,
+                    "Data"      => array( // ----- empty object throws an error ... hence this dummy field
+                        'test' => 'test'
+                    )
+                ]
+            ]
+        )->update();
+    }
+
 }
