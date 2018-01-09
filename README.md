@@ -1,2 +1,2 @@
 # steam
-a library to talk to steam
+A PHP library to talk to CodeLogic Steam
