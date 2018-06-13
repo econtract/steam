@@ -113,7 +113,7 @@ class SteamService
                 [
                     "ContextID" => $contextId,
                     "ID"        => $id,
-                    "Status"    => 113,
+                    "Status"    => 700, // ----- code for Sale, in future will use 610 if rejected
                     "Data"      => array( // ----- empty object throws an error ... hence this dummy field
                         'test' => 'test'
                     )
