@@ -1,37 +1,33 @@
-<?php
+<?php namespace Econtract\Steam;
 
-namespace Steam;
 
 use Ixudra\Curl\Builder;
 use Ixudra\Curl\CurlService;
 
-/**
- * Created by PhpStorm.
- * User: bilal
- * Date: 11/14/17
- * Time: 4:27 PM
- */
+class SteamService {
 
-class SteamService
-{
     protected $apiClient = null;
+
     protected $curlService = null;
+
     protected $steamBaseUrl = null;
+
     protected $authKey = null;
 
-    /**
-     * @var \Ixudra\Curl\Builder null
-     */
+    /** @var \Ixudra\Curl\Builder */
     protected $request = null;
-    protected $requestData = [];
+
+    protected $requestData = array();
 
     protected $guards = array();
+
 
     public function __construct($baseUrl, $authKey)
     {
         $this->steamBaseUrl = $baseUrl;
         $this->authKey = $authKey;
     }
+
 
     /**
      * @return $this
@@ -48,15 +44,15 @@ class SteamService
     }
 
     /**
-     * helper method to populate curl request with data ...
+     * Helper method to populate curl request with data
      * @param $importSetupId
      * @param array $campaignRecords
      * @return $this
      */
-    public function populate($importSetupId, Array $campaignRecords = [])
+    public function populate($importSetupId, Array $campaignRecords = array())
     {
         $requestData = array(
-            'ImportSetupID' => $importSetupId
+            'ImportSetupID'         => $importSetupId,
         );
 
         if (count($campaignRecords) > 0) {
@@ -85,7 +81,7 @@ class SteamService
     }
 
     /**
-     * create the request and return the response
+     * Create the request and return the response
      * @return array
      */
     public function create()
@@ -94,7 +90,7 @@ class SteamService
     }
 
     /**
-     * update a request and return the response
+     * Update a request and return the response
      * @return array
      */
     public function update()
@@ -103,22 +99,21 @@ class SteamService
     }
 
     /**
-     * method to soft delete a steam record ...
-     * Ref: AB-169 ... status code 113 is used to indicate deleted record.
+     * Method to soft delete a steam record
      */
     public function delete($importSetupId, $contextId, $id)
     {
         return $this->populate($importSetupId,
-            [
-                [
-                    "ContextID" => $contextId,
-                    "ID"        => $id,
-                    "Status"    => 700, // ----- code for Sale, in future will use 610 if rejected
-                    "Data"      => array( // ----- empty object throws an error ... hence this dummy field
-                        'test' => 'test'
+            array(
+                array(
+                    "ContextID"     => $contextId,
+                    "ID"            => $id,
+                    "Status"        => 700,         // ----- code for Sale, in future will use 610 if rejected
+                    "Data"          => array(       // ----- empty object throws an error ... hence this dummy field
+                        'test'          => 'test',
                     )
-                ]
-            ]
+                )
+            )
         )->update();
     }
 

@@ -1,22 +1,25 @@
 {
     "name": "econtract/steam",
-    "description": "A wrapper lib to use steam",
-    "version": "2.5.0",
+    "description": "E-Contract BVBA Steam API package",
+    "version": "2.6.0",
     "keywords": ["E-Contract", "Aanbieders", "Steam"],
-    "homepage": "http://aanbieders.be",
+    "homepage": "https://aanbieders.be",
     "license": "proprietary",
+
     "authors": [
         {
-            "name": "Bilal",
-            "email": "bilal.murtaza@live.com"
+            "name": "Jan Oris",
+            "email": "jan.oris@ixudra.be"
         }
     ],
+
     "require": {
         "ixudra/curl": "~6.0"
     },
+
     "autoload": {
-        "psr-0": {
-            "Steam\\": "src/"
+        "psr-4": {
+            "Econtract\\Toolbox\\": "src/"
         }
     }
 }
